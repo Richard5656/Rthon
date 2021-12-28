@@ -1,0 +1,8 @@
+class character:
+    inventory = []
+    def __init__(self,hp,level,gender):
+        self.hp = hp
+        self.level = level
+        self.gender =""
+class item:
+    name = ""
