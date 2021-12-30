@@ -1,4 +1,3 @@
-
 class item:
     desc = "not described"
     def __init__(self,name, tier):
@@ -9,6 +8,10 @@ class item:
         print(f"{self.name}")
 
 class character:
+    x = 0
+    y = 0
+    x_buf = 0
+    y_buf = 0
     gold=5
     inventory =[]
     mainslot = item("empty",0)
@@ -17,7 +20,35 @@ class character:
         self.level = level
         self.gender = gender
         self.name = name
-       
+        
+    def move_up(self,how_many_to_move_by):
+        self.y_buf = self.y
+        self.y-= how_many_to_move_by
+        self.limit_movement()
+    def move_down(self,how_many_to_move_by):
+         self.y_buf = self.y
+         self.y+= how_many_to_move_by
+         self.limit_movement()
+    def move_left(self,how_many_to_move_by):
+         self.x_buf = self.x
+         self.x-= how_many_to_move_by
+         self.limit_movement()
+    def move_right(self,how_many_to_move_by):
+         self.x_buf = self.x
+         self.x+= how_many_to_move_by
+         self.limit_movement()
+         
+    def limit_movement(self):
+        while self.x > 20:
+            self.x-=1
+        while self.y > 20:
+            self.y-=1
+        while self.x < 0:
+            self.x+=1
+        while self.y < 0:
+            self.y+=1
+    
+    
     def display_inventory(self):
         print(f"{self.name}'s inventory:")
         for i,v in enumerate(self.inventory):
@@ -50,7 +81,7 @@ class map:
         c= 1452457
         a= 1067711
         self._map =[]
-        
+
         for i in range(0,100):
             x=((x*a)+c)%m
             
